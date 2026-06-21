@@ -8,3 +8,4 @@ node_modules/
 .DS_Store
 *.log
 scrub2.mjs
+PUBLISH-INFO.md
