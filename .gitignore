@@ -1,0 +1,9 @@
+# Build recipe + source markdown stay private (contain build paths / notes).
+# The shipped site is index.html + assets/ only.
+scrub.mjs
+polish.mjs
+build.mjs
+src/
+node_modules/
+.DS_Store
+*.log

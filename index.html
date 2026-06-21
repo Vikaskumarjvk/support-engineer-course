@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SE Academy — Support Engineer, from zero</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">SE</div>
+      <div class="brand-text">
+        <div class="brand-title">SE Academy</div>
+        <div class="brand-sub">Support Engineer, from zero</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label"><span id="progress-text">0 / 0 done</span></div>
+      <div class="progress-bar"><div id="progress-fill"></div></div>
+    </div>
+
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search all lessons..." autocomplete="off" />
+      <div id="search-results"></div>
+    </div>
+
+    <nav id="nav"><!-- built by app.js --></nav>
+
+    <div class="sidebar-foot">
+      <button id="reset-progress" title="Clear all your done-marks">reset progress</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main id="main">
+    <div id="topbar">
+      <button id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      <div id="crumb"></div>
+      <button id="mark-done" class="mark-btn">mark done</button>
+    </div>
+
+    <article id="content"><!-- rendered lesson --></article>
+
+    <div id="pager">
+      <button id="prev" class="pager-btn">&larr; Previous</button>
+      <button id="next" class="pager-btn">Next &rarr;</button>
+    </div>
+  </main>
+
+</div>
+
+<script src="assets/content.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
