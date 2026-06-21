@@ -360,6 +360,7 @@
     enrichContent(); buildTOC(l); setMarkBtn(); setBmBtn(); buildPager(idx); highlightActive();
     scroller.scrollTop = 0; updateReadBar(); spyTOC();
     document.title = l.title + " — SE Academy";
+    try { document.dispatchEvent(new CustomEvent("se:render", { detail: { id: id, section: l.section, idx: idx } })); } catch (e) {}
   }
   function buildPager(idx) {
     var prev = idx > 0 ? LESSONS[idx - 1] : null, next = idx < LESSONS.length - 1 ? LESSONS[idx + 1] : null;
@@ -383,6 +384,7 @@
     var wasDone = !!progress[currentId];
     if (wasDone) delete progress[currentId]; else progress[currentId] = true;
     saveProgress(); setMarkBtn(); updateProgressUI();
+    try { document.dispatchEvent(new CustomEvent("se:done", { detail: { id: currentId, done: !wasDone } })); } catch (e) {}
     if (!wasDone) {
       var r = markBtn.getBoundingClientRect();
       FX.burst(r.left + r.width / 2, r.top + r.height / 2);
@@ -598,6 +600,21 @@
   $("menu-toggle").addEventListener("click", function () { var o = sidebar.classList.toggle("open"); scrim.classList.toggle("show", o); });
   function closeMobile() { sidebar.classList.remove("open"); scrim.classList.remove("show"); }
   scrim.addEventListener("click", closeMobile);
+
+  /* ---------- public API for game.js (read-only helpers) ---------- */
+  window.SEApp = {
+    lessons: LESSONS,
+    go: go,
+    home: renderHome,
+    current: function () { return currentId; },
+    progress: function () { return progress; },
+    fx: FX,
+    toast: toast,
+    content: content,
+    numberOf: numberOf,
+    onContent: function (fn) { document.addEventListener("se:render", function (e) { fn(e.detail); }); },
+    onDone: function (fn) { document.addEventListener("se:done", function (e) { fn(e.detail); }); }
+  };
 
   /* ---------- boot ---------- */
   buildNav(); buildBookmarks();
