@@ -37,7 +37,9 @@
   var badges = lsJSON(K.badges);
   var visited = lsJSON(K.visited);
 
-  var XP_READ = 10, XP_DONE = 20, XP_QUIZ_EACH = 15, XP_PERFECT_BONUS = 20;
+  var XP_READ = 10, XP_DONE = 20, XP_QUIZ_EACH = 15, XP_PERFECT_BONUS = 20, XP_LAB = 25;
+  var K_LAB = "se_academy_lab_xp_v1"; // {labId: true} for lab-XP-already-awarded
+  var labXP = lsJSON(K_LAB);
 
   /* ---- SE ladder levels (real ladder, gamified thresholds) ---- */
   var LEVELS = [
@@ -69,6 +71,8 @@
     { id: "streak-3", icon: "🔥", name: "On a Roll", desc: "3-day learning streak" },
     { id: "streak-7", icon: "⚡", name: "Unstoppable", desc: "7-day learning streak" },
     { id: "se3", icon: "🏅", name: "Reached SE3", desc: "Hit the SE3 level" },
+    { id: "lab-first", icon: "⌨️", name: "Hands On", desc: "Pass your first lab exercise" },
+    { id: "lab-java", icon: "☕", name: "Java Coder", desc: "Finish all 10 Java exercises" },
     { id: "platinum", icon: "👑", name: "Hero", desc: "100% lessons + every quiz aced" }
   ];
 
@@ -291,6 +295,15 @@
   App.onDone(function (d) {
     if (d.done) { addXP(XP_DONE); }
     checkBadges();
+  });
+  document.addEventListener("se:lab-done", function (e) {
+    var id = e.detail && e.detail.id; if (!id) return;
+    if (!labXP[id]) { labXP[id] = true; lsSet(K_LAB, JSON.stringify(labXP)); addXP(XP_LAB); }
+    award("lab-first");
+    // all 10 Java exercises done?
+    var javaDone = Object.keys(labXP).filter(function (k) { return k.indexOf("java-") === 0; }).length;
+    if (javaDone >= 10) award("lab-java");
+    refreshDashboard();
   });
 
   /* ---- boot ---- */

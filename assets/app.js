@@ -617,11 +617,15 @@
   };
 
   /* ---------- boot ---------- */
+  function isLabHash(h) { return h === "lab" || h.indexOf("lab/") === 0; }
   buildNav(); buildBookmarks();
   var hash = (location.hash || "").replace(/^#/, "");
-  if (hash && lessonIndex(hash) >= 0) go(hash); else renderHome();
+  // lab.js owns the #lab and #lab/<id> routes; don't render a lesson/home over them
+  if (isLabHash(hash)) { /* lab.js handles it on its own boot */ }
+  else if (hash && lessonIndex(hash) >= 0) go(hash); else renderHome();
   window.addEventListener("hashchange", function () {
     var h = (location.hash || "").replace(/^#/, "");
+    if (isLabHash(h)) return; // lab.js handles lab routes
     if (h && h !== currentId && lessonIndex(h) >= 0) go(h);
     else if (h === "home" && currentId !== "home") renderHome();
   });

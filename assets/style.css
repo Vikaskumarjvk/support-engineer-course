@@ -432,3 +432,56 @@ html[data-motion="calm"] #aurora { display: none; }
 .quiz-result.pass { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line)); }
 .quiz-result.retry { background: var(--bg-2); border: 1px solid var(--line); }
 .quiz-retry { margin-left: 8px; background: var(--accent); color: #06140c; border: none; padding: 6px 14px; border-radius: 7px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 13px; }
+
+/* ============================================================
+   CODING LAB — editor, terminal, run/check UI
+   ============================================================ */
+.lab-launch { display: flex; align-items: center; gap: 9px; width: 100%; margin-top: 12px; padding: 11px 13px; border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line)); border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--accent-soft), transparent); color: var(--heading); font-family: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all .14s var(--ease); }
+.lab-launch:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.lab-launch svg { color: var(--accent); flex: 0 0 auto; }
+
+.lab-home, .lab-lesson { max-width: var(--read-w); margin: 0 auto; }
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 11px; }
+.lab-card { position: relative; text-align: left; display: flex; align-items: center; gap: 10px; padding: 15px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-1); color: var(--txt); font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: all .14s var(--ease); }
+.lab-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.lab-card .lab-check { flex: 0 0 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent; transition: all .14s var(--ease); }
+.lab-card.done { border-color: color-mix(in srgb, var(--done) 45%, var(--line)); }
+.lab-card.done .lab-check { background: var(--done); border-color: var(--done); color: #06140c; }
+.lab-card-title { line-height: 1.35; }
+
+.lab-bc { font-size: 12.5px; color: var(--txt-faint); margin-bottom: 6px; }
+.lab-bc a { color: var(--accent); text-decoration: none; }
+.lab-bc .sec { color: var(--txt-faint); }
+.lab-lesson h1 { font-size: clamp(23px, 4vw, 30px); font-weight: 800; letter-spacing: -.02em; color: var(--heading); margin: 0 0 16px; }
+.lab-teach { color: var(--txt); line-height: 1.72; margin-bottom: 18px; }
+.lab-teach pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; overflow-x: auto; font: 13px/1.6 var(--font-mono); color: var(--code-txt); }
+.lab-teach code { font-family: var(--font-mono); font-size: .92em; color: var(--code-inline); background: var(--code-bg); padding: 1px 5px; border-radius: 5px; }
+.lab-teach pre code { background: none; padding: 0; color: inherit; }
+
+.lab-task { display: flex; gap: 10px; align-items: flex-start; padding: 13px 15px; border-radius: var(--radius-sm); background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); color: var(--txt); font-size: 14px; line-height: 1.6; margin-bottom: 18px; }
+.lab-task svg { color: var(--accent); flex: 0 0 auto; margin-top: 3px; }
+.lab-task b { color: var(--heading); }
+
+.editor-wrap { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--code-bg); box-shadow: var(--shadow-sm); }
+.editor-top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--bg-2); border-bottom: 1px solid var(--line); }
+.lang-tag { font: 700 11px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 6px; margin-right: auto; }
+.ed-btn { font-family: inherit; font-size: 12.5px; font-weight: 600; border-radius: 7px; padding: 6px 12px; cursor: pointer; border: 1px solid var(--line); background: var(--bg-1); color: var(--txt-dim); transition: all .12s var(--ease); display: inline-flex; align-items: center; gap: 5px; }
+.ed-btn.ghost:hover { color: var(--txt); border-color: var(--txt-faint); }
+.ed-btn.run { background: var(--accent); color: #06140c; border-color: var(--accent); font-weight: 700; }
+.ed-btn.run:hover { filter: brightness(1.08); transform: translateY(-1px); }
+#lab-editor { width: 100%; display: block; border: none; outline: none; resize: none; background: var(--code-bg); color: var(--code-txt); font: 13.5px/1.65 var(--font-mono); padding: 14px 16px; tab-size: 2; min-height: 120px; }
+
+.lab-out-head { font: 700 11px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--txt-faint); margin: 18px 0 6px; }
+.lab-output { background: #05070a; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 13px 16px; font: 13px/1.55 var(--font-mono); color: #d6e0ee; white-space: pre-wrap; word-break: break-word; min-height: 44px; margin: 0; }
+.lab-output .muted { color: var(--txt-faint); }
+.lab-output .err { color: #ff8585; }
+
+.lab-verdict { margin-top: 14px; padding: 13px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 9px; }
+.lab-verdict.pass { background: color-mix(in srgb, var(--done) 16%, transparent); border: 1px solid var(--done); color: var(--heading); }
+.lab-verdict.pass svg { color: var(--done); }
+.lab-verdict.tryagain { background: var(--bg-2); border: 1px solid var(--line); color: var(--txt-dim); font-weight: 500; }
+.lab-hint { margin-top: 12px; padding: 12px 15px; border-radius: var(--radius-sm); background: var(--bg-2); border: 1px dashed var(--line); color: var(--txt-dim); font-size: 13.5px; line-height: 1.6; }
+
+.lab-pager { display: flex; gap: 12px; margin: 34px 0 10px; }
+.lab-pager .pager-card { flex: 1; }
+.lab-pager .pager-card.next { text-align: right; }
